@@ -1,0 +1,19 @@
+name: SquidFlow Proxy
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build_app:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Build Container
+        run: |
+          pushd app
+          #TODO: Cache already built layers
+          docker build -t squid-proxy . 
+          docker image ls
